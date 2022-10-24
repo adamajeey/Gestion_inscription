@@ -11,46 +11,62 @@
     <title>Inscription</title>
 </head>
 <body>
+    <h1>Formulaire d'inscription</h1>
 <div class="container">
-<form class="row g-3">
+  <form class="row g-3" id="formul">
   <div class="col-md-6">
-    <label for="inputPrenom" class="form-label">Prenom</label>
-    <input type="text" class="form-control" id="inputPrenom">
+    <label for="inputPrenom" class="form-label">Prenom*</label>
+    <input type="text" class="form-control" id="Prenom">
+    <span id='erreur'></span>
+    <span id='ok'></span>
   </div>
-  <form class="row g-3">
   <div class="col-md-6">
-    <label for="inputNom" class="form-label">Nom</label>
+    <label for="inputNom" class="form-label">Nom*</label>
     <input type="text" class="form-control" id="Nom">
+    <span id='erreur1'></span>
+    <span id='ok1'></span>
   </div>
   <div class="col-md-6">
-    <label for="inputEmail4" class="form-label">Adresse mail</label>
-    <input type="email" class="form-control" id="Email">
+    <label for="inputEmail4" class="form-label">Adresse mail*</label>
+    <input type="text" class="form-control" id="Email" onchange='validmail()'>
+    <span id='erreur6'></span>
+    <span id='ok2'></span>
   </div>
   <div class="col-md-6">
-    <label for="Password" class="form-label">Mot de passe</label>
+    <label for="Password" class="form-label">Mot de passe*</label>
     <input type="password" class="form-control" id="Password">
+    <span id='erreur3'></span>
+    <span id='ok3'></span>
   </div>
   <div class="col-md-6">
-    <label for="inputPassword4" class="form-label">Confirmer le mot de passe</label>
-    <input type="password" class="form-control" id="inputPassword4">
+    <label for="inputPassword4" class="form-label">Confirmer le mot de passe*</label>
+    <input type="password" class="form-control" id="Confirm_Password">
+    <span id='erreur4'></span>
+    <span id='ok4'></span>
   </div>
   <div class="col-md-6">
     <label for="inputState" class="form-label">Role</label>
-    <select id="inputState" class="form-select">
+    <select id="role" class="form-select">
       <option selected></option>
       <option>Administrateur</option>
       <option>Utilisateur</option>
     </select>
+    <span id='erreur5'></span>
+    <span id='ok'></span>
   </div>
-  <div class="form-group">
-    <label for="exampleFormControlFile1">Mettre une photo de profil</label><br/>
-    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+ 
+  <div class="col-md-3">
+    <label for="fil" class="foerm-label">photo</label>
+    <input type="file" class="form-control" id="file">
+    
   </div>
-  <div class="col-12" id="bouton">
-        <input type="submit" name="submit" id="submit" class="btn btn-light" value="S'inscrire">
+
+  <div class="col-12">
+        <input type="submit" name="submit" id="bouton" class="btn btn-light" value="S'inscrire">
   </div>
   </form>
 </div>
+<script src="Inscription.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
