@@ -1,0 +1,19 @@
+.container{
+    background-color: rgba(2, 117, 216, 1);
+    margin-top: 5%;
+    padding: 50px;
+    border-radius: 10px;
+    width: 30%;
+}
+h1{
+    background-color:  rgba(2, 117, 216, 1);
+    padding: 50px;
+    text-align: center;
+    color: white;
+}
+.pass{
+    color: white;
+}
+.bouton{
+    margin-left: 40%;
+}

@@ -1,0 +1,23 @@
+.container{
+    background-color: rgba(2, 117, 216, 1);
+    margin-top: 5%;
+    padding: 50px;
+    border-radius: 10px;
+}
+
+.table{
+    color: white;
+}
+
+h1{
+    background-color:  rgba(2, 117, 216, 1);
+    padding: 50px;
+    text-align: center;
+    color: white;
+    
+}
+.modif{
+    text-align: center;
+    color: greenyellow;
+    font-size: 20px;
+}
