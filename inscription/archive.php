@@ -1,6 +1,4 @@
-<?php include '../connexion_bdd.php';
-
-?>
+<?php include '../connexion_bdd.php';?>
 
 <!DOCTYPE html>
 <html lang="en">
