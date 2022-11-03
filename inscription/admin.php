@@ -24,7 +24,7 @@ $data = $req ->fetch();
   <h2 style="color: rgba(2, 117, 216, 1); text-align:center; font-size:50px"><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>
   <div class="d-grid gap-2 d-md-flex justify-content-md-end espace" >
   
-    <div  style="height:20px; margin-left:30%">
+<div  style="height:37px; margin-left:30%; display:flex">
     <input type="search"style="width: 70%; height:36px" placeholder="recherche" aria-label="Search" aria-describedby="search-addon" />
     <button type="button" class="btn btn-primary">recherche</button>
 </div>
