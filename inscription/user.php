@@ -12,6 +12,10 @@
 </head>
 <body>
   <h1>Espace utilisateurs</h1>
+  <div class="bouton" style="margin-left: 85%;">
+    <a href="connexion.php"><button type="button" class="btn btn-primary btn-lg">Deconnexion</button></a> 
+    <a href="archive.php"><button type="button" class="btn btn-primary btn-lg">Archivés</button></a> 
+  </div>
 <div class="container">
  <table class="table">
   <thead>

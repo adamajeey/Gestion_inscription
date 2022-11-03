@@ -46,16 +46,16 @@ if ($select_mail->rowCount() > 0)
 <body>
 <h1>Formulaire d'inscription</h1>
 <?php
- if (isset($message)) {
+if (isset($message)) {
    foreach($message as $message){
     echo "<div class='message'>
     $message
     </div>";
    }
- }
+ } 
 ?> 
 <div class="container">
-    <form class="row g-3" action="#" method="post" onsubmit="return validation()">
+    <form class="row g-3" action="" method="post" onsubmit="return validation()">
 
                 <div class="form-group col-md-6" >
                   <label>Prenom*</label>
@@ -107,6 +107,6 @@ if ($select_mail->rowCount() > 0)
                 </div>
               </form>
 </div>
-<script src="Inscription.js"></script>
+<script src="inscription.js"></script>
 </body>
 </html>

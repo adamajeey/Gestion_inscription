@@ -6,10 +6,10 @@ function validation() {
   let mobilenumber= document.getElementById('mobilenumber').value;
   let email= document.getElementById('email').value;
   let nom= document.getElementById('nom').value;
-  let regex = /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+  
   
     if (user.trim() == "") {
-    document.getElementById('username').innerHTML ="Ce champ ne doit pas etre vide!";
+    document.getElementById('username').innerHTML ="Ce champ ne doit pas etre vide!";/ */
     return false;
                
   }
@@ -58,15 +58,19 @@ function validation() {
           document.getElementById('MobileNumberid').innerHTML =""
             return false
       };
+      let regex = /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+      if (regex.test(document.getElementById('email')).value){
+        document.getElementById('email').innerHTML = '';
+        return true;
+    }
+    else{
+        email.innerHTML = "L'adresse email incorrect!";
+        email.style.color = 'red';
+        return false;
+    
+        
+    }
    }
 
-   if (regex.test(document.getElementById('email').value)){
-    document.getElementById('email').innerHTML = '';
-    return true;
-}
-else{
-    email.innerHTML = "L'adresse email incorrect!";
-    email.style.color = 'red';
-    return false;
-}
+
 

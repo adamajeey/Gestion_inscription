@@ -1,5 +1,11 @@
 <?php session_start();?>
-<?php include '../connexion_bdd.php';?>
+<?php include '../connexion_bdd.php';
+
+//Recuperation des donnees de l'utilisateurs 
+$req = $conn->prepare("SELECT * FROM utilisateurs WHERE id_utilisateurs = ?");
+$req->execute(array($_SESSION['id_utilisateurs']));
+$data = $req ->fetch();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +21,17 @@
 <body>
  
   <h1>Espace Administrateur</h1>
-  
+  <h2><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>
+
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <div class="input-group">
+    <input type="search" class="form-control rounded" placeholder="recherche" aria-label="Search" aria-describedby="search-addon" />
+    <button type="button" class="btn btn-primary">recherche</button>
+</div>
+    <a href="archive.php"><button class="btn btn-primary me-md-1" type="button">Archivés</button></a> 
+    <a href="../index.php"><button class="btn btn-primary" type="button">Deconnexion</button></a> 
+ </div>
+
 <div class="container">
   <div  class="modif">
   <p><?=$_GET['modif'] ?? null?></p>

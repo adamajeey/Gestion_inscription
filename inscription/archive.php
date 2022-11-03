@@ -12,7 +12,8 @@
     <title>Archive</title>
 </head>
 <body>
-  <h1>Liste des archives</h1>
+<h1>Liste des archives</h1>
+<a href="admin.php"><button type="button" class="btn btn-primary">Retour</button></a> 
 <div class="container">
 <table class="table">
   <thead>
@@ -43,9 +44,9 @@ while ($row=$req->fetch(PDO::FETCH_ASSOC)) {
   $role=$row['role_utilisateurs'];
   $datearch=$row['date_archivage_utilisateurs'];
 
-  echo '<tr>
+  echo '<tr class="cont">
 
-      <th>'.$prenom.'</th>
+      <td>'.$prenom.'</td>
       <td>'.$nom.'</td>
       <td>'.$email.'</td>
       <td>'.$matricule.'</td>
