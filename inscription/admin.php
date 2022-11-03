@@ -28,7 +28,8 @@ $data = $req ->fetch();
  <div  style="height:37px; margin-left:30%; display:flex">
  <form action="" method="">
     <input name="search" type="search"style="width: 70%; height:36px" placeholder="Recherche"  />
-    <button type="button" class="btn btn-primary">Recherche</button></form>
+    <button type="submit" class="btn btn-primary">Recherche</button>
+  </form>
 </div>
     <a href="archive.php"><button class="btn btn-primary me-md-1" type="button">Archivés</button></a> 
     <a href="../index.php"><button class="btn btn-primary" type="button">Deconnexion</button></a> 
@@ -53,7 +54,7 @@ $data = $req ->fetch();
   
     <?php
      if ( (isset($_GET['search'])) && ($_GET['search'] != "")){
-        $search ='GR-'. $_GET['search'];
+        $search = $_GET['search'];
         $sql = "SELECT * from utilisateurs WHERE etat_utilisateurs = 0  AND matricule_utilisateurs lIKE '%$search%' OR nom_utilisateurs LIKE '%$search%' LIMIT 10";
         $select = $conn->prepare($sql);
         $select->execute();
