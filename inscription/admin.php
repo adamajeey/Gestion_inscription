@@ -14,18 +14,18 @@ $data = $req ->fetch();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="users.css">
+  <link rel="stylesheet" href="user.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css%22%3E">
   <title>Admin</title>
 </head>
 <body>
  
   <h1>Espace Administrateur</h1>
-  <h2><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>
-
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <div class="input-group">
-    <input type="search" class="form-control rounded" placeholder="recherche" aria-label="Search" aria-describedby="search-addon" />
+  <h2 style="color: rgba(2, 117, 216, 1); text-align:center; font-size:50px"><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end espace" >
+  
+    <div  style="height:20px; margin-left:30%">
+    <input type="search"style="width: 70%; height:36px" placeholder="recherche" aria-label="Search" aria-describedby="search-addon" />
     <button type="button" class="btn btn-primary">recherche</button>
 </div>
     <a href="archive.php"><button class="btn btn-primary me-md-1" type="button">Archivés</button></a> 
