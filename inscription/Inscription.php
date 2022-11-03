@@ -22,7 +22,7 @@ if ($select_mail->rowCount() > 0)
    $insertion = $conn->prepare("INSERT INTO `utilisateurs` (prenom_utilisateurs,nom_utilisateurs, email_utilisateurs, mot_de_passe_utilisateurs, role_utilisateurs, photo_utilisateurs) VALUES (?,?,?,?,?,?)");
    $insertion ->execute (array($prenom, $nom, $email, $mdp,  $role, $photo));
  
-   $matricule = 'GR- '. $conn->lastInsertId(); 
+   $matricule = 'GR-'. $conn->lastInsertId(); 
    $sql2 = "UPDATE utilisateurs  SET  matricule_utilisateurs = '$matricule' WHERE email_utilisateurs = '$email' ";
    $matricule2 = $conn->prepare($sql2);
    $matricule2->execute();

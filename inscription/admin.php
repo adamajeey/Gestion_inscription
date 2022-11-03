@@ -26,9 +26,9 @@ $data = $req ->fetch();
 <div class="d-grid gap-2 d-md-flex justify-content-md-end espace" >
   <h2 style="color: rgba(2, 117, 216, 1); text-align:center; font-size:50px; height:5px"><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>
  <div  style="height:37px; margin-left:30%; display:flex">
- <form action="" method="get">
-    <input name="search" type="search"style="width: 70%; height:36px" placeholder="recherche" aria-label="Search" aria-describedby="search-addon" />
-    <button type="button" class="btn btn-primary">recherche</button></form>
+ <form action="" method="">
+    <input name="search" type="search"style="width: 70%; height:36px" placeholder="Recherche"  />
+    <button type="button" class="btn btn-primary">Recherche</button></form>
 </div>
     <a href="archive.php"><button class="btn btn-primary me-md-1" type="button">Archivés</button></a> 
     <a href="../index.php"><button class="btn btn-primary" type="button">Deconnexion</button></a> 
@@ -53,8 +53,8 @@ $data = $req ->fetch();
   
     <?php
      if ( (isset($_GET['search'])) && ($_GET['search'] != "")){
-        $search = $_GET['search'];
-        $sql = "SELECT * from utilisateurs WHERE etat_utilisateurs = 0   AND matricule_utilisateurs lIKE '%$search%' LIMIT 10";
+        $search ='GR-'. $_GET['search'];
+        $sql = "SELECT * from utilisateurs WHERE etat_utilisateurs = 0  AND matricule_utilisateurs lIKE '%$search%' OR nom_utilisateurs LIKE '%$search%' LIMIT 10";
         $select = $conn->prepare($sql);
         $select->execute();
         $row = $select->fetchAll(PDO::FETCH_ASSOC); 

@@ -10,5 +10,4 @@ if (isset($_GET['id_ut'])) {
     die('Erreur :' .$e->message());
 }
 }
-
 ?>
