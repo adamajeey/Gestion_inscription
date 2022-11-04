@@ -10,7 +10,7 @@
   $role = $_POST['MobileNumber'];
   $photo = $_POST['photos'];
 
-  
+  //Verification si email exit deja
   $select_mail = $conn->prepare("SELECT email_utilisateurs FROM `utilisateurs` WHERE email_utilisateurs = ? ");
   $select_mail->execute([$email]);
 
@@ -105,6 +105,7 @@ if (isset($message)) {
                 <div class="col-12">
                   <input type="submit" name="submit" id="bouton" class="btn btn-light" value="S'inscrire">
                 </div>
+                <a href="../index.php" style="color: white; margin-left:90%">Se connecter</a>
               </form>
 </div>
 <script src="inscription.js"></script>

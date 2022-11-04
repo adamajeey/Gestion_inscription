@@ -2,6 +2,8 @@
 <?php include 'connexion_bdd.php';?>
 
 <?php
+
+
 if (isset($_POST['email'],$_POST['password'])) {
     
 
@@ -79,7 +81,7 @@ if($row > 0){
                 <input class="form-control" type="password" id="password" name="password">
                 <p id="mdp"></p>
             </div> <br>
-            <div class="col-md-6 bouton">
+            <div class="col-md-6 bouton" style="margin-left: 105px;">
               <input class="btn btn-light" type="submit" value="Se connecter">
             </div>
             <a href="./inscription/Inscription.php" style="color:white"> S'inscrire</a>
