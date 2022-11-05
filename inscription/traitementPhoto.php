@@ -1,49 +1,102 @@
- <!-- // Recuperation images -->
-
 <?php
 session_start();
-include "../connexion_bdd.php";
-// var_dump($_FILES);die;
+include '../connexion_bdd.php';
 if (isset($_POST['submit'])){
 /*   var_dump($_FILES);die;
-*/
+ */  
 //ici on verifie si la session de l'utilisateur qui s'est connecté existe
-if (isset($_SESSION['id_utilisateurs'] )) {
-    $id = $_SESSION['id_utilisateurs'] ;
-}
-if(!empty($_FILES["image"]["name"])) { 
-// Get file info 
-$fileName = basename($_FILES["image"]["name"]); 
-$fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+if (isset($_SESSION['id_utilisateurs'])) {
+    $id = $_SESSION['id_utilisateurs'];
+  }
+  //ici on verifie si le champ de l'image est vide ou pas 
+  if(!empty($_FILES["image"]["name"])) { 
+    // Get file info 
+    $fileName = basename($_FILES["image"]["name"]); 
+    $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
 
-// Allow certain file formats 
-$allowTypes = array('jpg','png','jpeg','gif'); 
-if(in_array($fileType, $allowTypes)){ 
-    $image = $_FILES['image']['tmp_name']; 
-    $imgContent = addslashes(file_get_contents($image)); 
+    // Allow certain file formats 
+    $allowTypes = array('jpg','png','jpeg','gif'); 
+    if(in_array($fileType, $allowTypes)){ 
+        $image = $_FILES['image']['tmp_name']; 
+        $imgContent = addslashes(file_get_contents($image)); 
 
-    // Insert image content into database 
-    // $db = new PDO('mysql:host=localhost;dbname=test;charset=UTF8', 'root', '');
-    $getImage = $bdd->query("SELECT nom_photo FROM photo WHERE id_uitilisateurs=$id"); 
-    if ($getImage) {
-        $bdd->query("DELETE FROM photo WHERE id_uitilisateurs=$id");
-    }
-    $insert = $bdd->query("INSERT into photo (nom_photo,id_uitilisateurs) VALUES ('$imgContent',$id)"); 
+        // Insert image content into database 
+        // $db = new PDO('mysql:host=localhost;dbname=test;charset=UTF8', 'root', '');
+        $getImage = $conn->query("SELECT photo FROM images WHERE user=$id"); 
+        if ($getImage) {
+            $conn->query("DELETE FROM images WHERE user=$id");
+        }
+        $insert = $conn->query("INSERT into images (photo,user) VALUES ('$imgContent',$id)"); 
 
 
-    if($insert){ 
-        $status = 'success'; 
-        $statusMsg = "File uploaded successfully."; 
-        header('location:admin.php');
+        if($insert){ 
+          header('location:admin.php? mes=image inserer avec succes!');
+            $status = 'success'; 
+            $statusMsg = "File uploaded successfully."; 
+            // header('location:editProfile.php');
+        }else{ 
+            $statusMsg = "File upload failed, please try again."; 
+        }
     }else{ 
-        $statusMsg = "File upload failed, please try again."; 
-    }
+        $statusMsg = 'Désolé, seule les fichiers JPG, JPEG, PNG, & GIF sont autorisés.'; 
+    } 
 }else{ 
-    $statusMsg = 'Désolé, seule les fichiers JPG, JPEG, PNG, & GIF sont autorisés.'; 
-} 
-}else{ 
-$statusMsg = 'Veillez selectionner une image'; 
+    $statusMsg = 'Veuillez selectionner une image'; 
 }
-}
+  }
 
-?> 
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="laReussite.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <title>Formulaire</title>
+
+</head>
+<header>
+<button type="button" class="btn btn-primary"><a href="../pages/paramétrage.php" style="color:white">Retour</a></button>
+
+  <p><?= $_GET['mess'] ?? null ?></p>
+</header>
+
+<body>
+
+  <div class="container my-5">
+
+    <!-- <form action="paramétrage.php" method="post" class="row g-3" style="background-color:#D9D9D9" id="loginform">
+
+      <div class="col-auto">
+        <input type="file" class="form-control" id="photo" name="image" placeholder="PHOTO" required>
+      </div>
+      <div class="col-6">
+        <input type="submit" id="submit" name="submit" class="btn btn-primary" style="background-color:#05006B">
+      </div>
+      <script src=""></script>
+    </form> -->
+    <form action="" class="d-flex justify-content-center border p-2 needs-validation bg-light shadow" novalidate  method="post" enctype="multipart/form-data">
+
+
+
+                <input type="file"  id="inputGroupFile02" class="form-control w-100 m-3" name="image" required>
+                    <br>
+                    <div class="valid-feedback"></div>
+                    <div class="invalid-tooltip">Choisir une photo</div>
+                    &nbsp;
+                <button type="submit" id="photo" name="submit" class="btn btn-outline-primary col-md-1.5" title="changer">envoyer</button>
+                <span class="d-flex border m-1 p-3 btn btn-outline">
+                </span>
+            </form>
+
+
+
+</body>
+
+</html>

@@ -26,12 +26,12 @@ $data = $req ->fetch();
   <h1>Espace Administrateur</h1>
   <!-- Recupèration de la photo à la base de données -->
   <?php
-          $state = $conn->prepare("SELECT photo FROM image WHERE user=:user");
+          $state = $conn->prepare("SELECT photo FROM images WHERE user=:user");
           $state->execute(['user'=> $idSession]);
           $rows = $state->fetch(PDO::FETCH_ASSOC);
           ?>
           <!-- ici nous avons l'image du profil -->
-          <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($rows['photo']); ?>" class="rounded-circle border p-1 bg-secondary " height="100" width="100" />
+          <img src="data:images/jpg;charset=utf8;base64,<?php echo base64_encode($rows['photo']); ?>" class="rounded-circle border p-1 bg-secondary " height="100" width="100" />
 
 
 <p style="color: rgba(2, 117, 216, 1); font-size:25px; height:5px"><?php echo $data['matricule_utilisateurs'];?></p>

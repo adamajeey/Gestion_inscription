@@ -29,46 +29,7 @@ if ($select_mail->rowCount() > 0)
    $message []  = "inscription reussi, votre matricule: ". $matricule;
 }
 
-if (isset($_SESSION['id_utilisateurs'] )) {
-  $id = $_SESSION['id_utilisateurs'] ;
 }
-if(!empty($_FILES["image"]["name"])) { 
-// Get file info 
-$fileName = basename($_FILES["image"]["name"]); 
-$fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
-
-// Allow certain file formats 
-$allowTypes = array('jpg','png','jpeg','gif'); 
-if(in_array($fileType, $allowTypes)){ 
-  $image = $_FILES['image']['tmp_name']; 
-  $imgContent = addslashes(file_get_contents($image)); 
-
-  // Insert image content into database 
-  // $db = new PDO('mysql:host=localhost;dbname=test;charset=UTF8', 'root', '');
-  $getImage = $conn->query("SELECT photo FROM image WHERE user=$id"); 
-  if ($getImage) {
-      $conn->query("DELETE FROM image WHERE user=$id");
-  }
-  $insert = $conn->query("INSERT into image (photo,user) VALUES ('$imgContent',$id)"); 
-
-
-  if($insert){ 
-      $status = 'success'; 
-      $statusMsg = "File uploaded successfully."; 
-      header('location:admin.php');
-  }else{ 
-      $statusMsg = "File upload failed, please try again."; 
-  }
-}else{ 
-  $statusMsg = 'Désolé, seule les fichiers JPG, JPEG, PNG, & GIF sont autorisés.'; 
-} 
-}else{ 
-$statusMsg = 'Veillez selectionner une image'; 
-}
-}
-
-
-
 
 ?>
 
