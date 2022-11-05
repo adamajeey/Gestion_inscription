@@ -1,5 +1,8 @@
 <?php session_start();?>
 <?php include '../connexion_bdd.php';
+if ($_SESSION['id_utilisateurs']) {
+  $idSession=$_SESSION['id_utilisateurs'];
+}
 
 //Recuperation des donnees de l'utilisateurs 
 $req = $conn->prepare("SELECT * FROM utilisateurs WHERE id_utilisateurs = ?");
@@ -14,15 +17,24 @@ $data = $req ->fetch();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="user.css">
+  <link rel="stylesheet" href="users.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css%22%3E">
   <title>Admin</title>
-</head>
+</head> 
 <body>
  
   <h1>Espace Administrateur</h1>
+  <!-- Recupèration de la photo à la base de données -->
+  <?php
+          $state = $conn->prepare("SELECT photo FROM image WHERE user=:user");
+          $state->execute(['user'=> $idSession]);
+          $rows = $state->fetch(PDO::FETCH_ASSOC);
+          ?>
+          <!-- ici nous avons l'image du profil -->
+          <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($rows['photo']); ?>" class="rounded-circle border p-1 bg-secondary " height="100" width="100" />
 
-  <p style="color: rgba(2, 117, 216, 1); font-size:25px; height:5px"><?php echo $data['matricule_utilisateurs'];?></p>
+
+<p style="color: rgba(2, 117, 216, 1); font-size:25px; height:5px"><?php echo $data['matricule_utilisateurs'];?></p>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end espace" >
   <h2 style="color: rgba(2, 117, 216, 1); text-align:center; font-size:50px; height:5px"><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>
  <div  style="height:37px; margin-left:30%; display:flex">
@@ -53,6 +65,7 @@ $data = $req ->fetch();
   <tbody>
   
     <?php
+    //Scrip de la recherche
      if ( (isset($_GET['search'])) && ($_GET['search'] != "")){
         $search = $_GET['search'];
         $sql = "SELECT * from utilisateurs WHERE etat_utilisateurs = 0  AND matricule_utilisateurs lIKE '%$search%' OR nom_utilisateurs LIKE '%$search%' LIMIT 10";
@@ -81,7 +94,7 @@ $data = $req ->fetch();
             <path d="M4 48V41.95H44V48H4ZM8.1 36.65V30L26.75 11.35L33.4 18L14.75 36.65H8.1ZM11.1 33.65H13.35L29.1 17.9L26.85 15.65L11.1 31.4V33.65ZM35.6 15.8L28.95 9.15003L33.15 4.95003C33.5167 4.5167 33.9333 4.2917 34.4 4.27503C34.8667 4.25837 35.3333 4.48337 35.8 4.95003L39.7 8.85003C40.1333 9.28337 40.35 9.7417 40.35 10.225C40.35 10.7084 40.1667 11.1667 39.8 11.6L35.6 15.8Z" fill="white"/></a>
   
        
-          <a onclick ="return confirm(\'voulez vous vraiment archiver \')" href="delete.php?id_utilisateurs='.$id.'"><i class="bi bi-pencil-square"></i><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <a onclick ="return confirm(\'voulez-vous vraiment archiver ?\')" href="delete.php?id_utilisateurs='.$id.'"><i class="bi bi-pencil-square"></i><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M9 42C8.2 42 7.5 41.7 6.9 41.1C6.3 40.5 6 39.8 6 39V12.85C6 12.35 6.05 11.925 6.15 11.575C6.25 11.225 6.43333 10.9 6.7 10.6L9.5 6.8C9.76667 6.5 10.075 6.29167 10.425 6.175C10.775 6.05833 11.1833 6 11.65 6H36.35C36.8167 6 37.2167 6.05833 37.55 6.175C37.8833 6.29167 38.1833 6.5 38.45 6.8L41.3 10.6C41.5667 10.9 41.75 11.225 41.85 11.575C41.95 11.925 42 12.35 42 12.85V39C42 39.8 41.7 40.5 41.1 41.1C40.5 41.7 39.8 42 39 42H9ZM9.85 11.3H38.1L36.3 9H11.65L9.85 11.3ZM9 14.3V39H39V14.3H9ZM24 34.5L31.8 26.7L29.8 24.7L25.5 29V18.95H22.5V29L18.2 24.7L16.2 26.7L24 34.5Z" fill="white"/></a>
       
   

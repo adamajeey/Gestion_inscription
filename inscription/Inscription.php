@@ -8,7 +8,7 @@
   $email = $_POST['email']; 
   $mdp = password_hash($_POST['password'], PASSWORD_DEFAULT);
   $role = $_POST['MobileNumber'];
-  $photo = $_POST['photos'];
+  // $photo = $_POST['nom_photo']; 
 
   //Verification si email exit deja
   $select_mail = $conn->prepare("SELECT email_utilisateurs FROM `utilisateurs` WHERE email_utilisateurs = ? ");
@@ -19,9 +19,9 @@ if ($select_mail->rowCount() > 0)
     $message [] = "l'adresse mail existe déja";
 } else {
    // insertion des de donnees et auto-generer matricule 
-   $insertion = $conn->prepare("INSERT INTO `utilisateurs` (prenom_utilisateurs,nom_utilisateurs, email_utilisateurs, mot_de_passe_utilisateurs, role_utilisateurs, photo_utilisateurs) VALUES (?,?,?,?,?,?)");
-   $insertion ->execute (array($prenom, $nom, $email, $mdp,  $role, $photo));
- 
+   $insertion = $conn->prepare("INSERT INTO `utilisateurs` (prenom_utilisateurs,nom_utilisateurs, email_utilisateurs, mot_de_passe_utilisateurs, role_utilisateurs) VALUES (?,?,?,?,?)");
+   $insertion ->execute (array($prenom, $nom, $email, $mdp,  $role,));
+   
    $matricule = 'GR-'. $conn->lastInsertId(); 
    $sql2 = "UPDATE utilisateurs  SET  matricule_utilisateurs = '$matricule' WHERE email_utilisateurs = '$email' ";
    $matricule2 = $conn->prepare($sql2);
@@ -29,9 +29,54 @@ if ($select_mail->rowCount() > 0)
    $message []  = "inscription reussi, votre matricule: ". $matricule;
 }
 
-}  
+if (isset($_SESSION['id_utilisateurs'] )) {
+  $id = $_SESSION['id_utilisateurs'] ;
+}
+if(!empty($_FILES["image"]["name"])) { 
+// Get file info 
+$fileName = basename($_FILES["image"]["name"]); 
+$fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+
+// Allow certain file formats 
+$allowTypes = array('jpg','png','jpeg','gif'); 
+if(in_array($fileType, $allowTypes)){ 
+  $image = $_FILES['image']['tmp_name']; 
+  $imgContent = addslashes(file_get_contents($image)); 
+
+  // Insert image content into database 
+  // $db = new PDO('mysql:host=localhost;dbname=test;charset=UTF8', 'root', '');
+  $getImage = $conn->query("SELECT photo FROM image WHERE user=$id"); 
+  if ($getImage) {
+      $conn->query("DELETE FROM image WHERE user=$id");
+  }
+  $insert = $conn->query("INSERT into image (photo,user) VALUES ('$imgContent',$id)"); 
+
+
+  if($insert){ 
+      $status = 'success'; 
+      $statusMsg = "File uploaded successfully."; 
+      header('location:admin.php');
+  }else{ 
+      $statusMsg = "File upload failed, please try again."; 
+  }
+}else{ 
+  $statusMsg = 'Désolé, seule les fichiers JPG, JPEG, PNG, & GIF sont autorisés.'; 
+} 
+}else{ 
+$statusMsg = 'Veillez selectionner une image'; 
+}
+}
+
+
+
 
 ?>
+
+
+
+<!-- // Recuperation images -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,6 +99,8 @@ if (isset($message)) {
    }
  } 
 ?> 
+
+
 <div class="container">
     <form class="row g-3" action="" method="post" onsubmit="return validation()">
 
@@ -99,7 +146,7 @@ if (isset($message)) {
                 
                 <div class="col-md-3">
                   <label for="fil" class="form-label">Photo de profil</label>
-                  <input type="file" name="photos" class="form-control" id="file">
+                  <input type="file" name="image" class="form-control" id="file">
                </div>
 
                 <div class="col-12">

@@ -28,6 +28,7 @@ if($row > 0){
             $_SESSION['matricule_utilisateurs'] = $data['matricule_utilisateurs'];
             $_SESSION['prenom_utilisateurs'] = $data['prenom_utilisateurs'];
             $_SESSION['nom_utilisateurs'] = $data['nom_utilisateurs'];
+            $_SESSION['photo_utilisateurs'] = $data['photo_utilisateurs'];
             $_SESSION['email_utilisateurs'] = $data['email_utilisateurs'];
 
             $_SESSION['utilisateurs'] = $data['role_utilisateurs'];
