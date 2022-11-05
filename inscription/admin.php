@@ -30,10 +30,10 @@ $data = $req ->fetch();
           $state->execute(['user'=> $idSession]);
           $rows = $state->fetch(PDO::FETCH_ASSOC);
           ?>
+     
           <!-- ici nous avons l'image du profil -->
           <img src="data:images/jpg;charset=utf8;base64,<?php echo base64_encode($rows['photo']); ?>" class="rounded-circle border p-1 bg-secondary " height="100" width="100" />
-
-
+          <a href="traitementPhoto.php">photo</a>
 <p style="color: rgba(2, 117, 216, 1); font-size:25px; height:5px"><?php echo $data['matricule_utilisateurs'];?></p>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end espace" >
   <h2 style="color: rgba(2, 117, 216, 1); text-align:center; font-size:50px; height:5px"><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>

@@ -28,7 +28,6 @@ if (isset($_SESSION['id_utilisateurs'])) {
         }
         $insert = $conn->query("INSERT into images (photo,user) VALUES ('$imgContent',$id)"); 
 
-
         if($insert){ 
           header('location:admin.php? mes=image inserer avec succes!');
             $status = 'success'; 
@@ -48,7 +47,6 @@ if (isset($_SESSION['id_utilisateurs'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -63,12 +61,9 @@ if (isset($_SESSION['id_utilisateurs'])) {
 </head>
 <header>
 <button type="button" class="btn btn-primary"><a href="../pages/paramétrage.php" style="color:white">Retour</a></button>
-
   <p><?= $_GET['mess'] ?? null ?></p>
 </header>
-
 <body>
-
   <div class="container my-5">
 
     <!-- <form action="paramétrage.php" method="post" class="row g-3" style="background-color:#D9D9D9" id="loginform">
@@ -82,8 +77,6 @@ if (isset($_SESSION['id_utilisateurs'])) {
       <script src=""></script>
     </form> -->
     <form action="" class="d-flex justify-content-center border p-2 needs-validation bg-light shadow" novalidate  method="post" enctype="multipart/form-data">
-
-
 
                 <input type="file"  id="inputGroupFile02" class="form-control w-100 m-3" name="image" required>
                     <br>
