@@ -12,7 +12,7 @@
            $nom = htmlspecialchars($_POST['nom']);
            $email = htmlspecialchars($_POST['email']);
 
-           $id = $_GET['id_utilisateurs']; // On stock l'id recuperer dans l'url7
+           $id = $_GET['id_utilisateurs']; // On stock l'id recuperer dans l'url
            $datemodif=date('y_m_d');
  
            $update = $conn->prepare("UPDATE utilisateurs SET prenom_utilisateurs = '$prenom', nom_utilisateurs = '$nom', email_utilisateurs = '$email', date_modification_utilisateurs = '$datemodif' WHERE id_utilisateurs = '$id'");
@@ -41,6 +41,7 @@
 </head>
     <body>
     <h1>Modification</h1>
+    <a href="admin.php"><button type="button" class="btn btn-primary">Retour</button></a> 
     <div class='container'>
  <?php 
 
