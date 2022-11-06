@@ -26,8 +26,8 @@ $data = $req ->fetch();
   <h1>Espace Administrateur</h1>
   <!-- Recupèration de la photo à la base de données -->
   <?php
-          $state = $conn->prepare("SELECT photo FROM images WHERE user=:user");
-          $state->execute(['user'=> $idSession]);
+          $state = $conn->prepare("SELECT photo FROM images WHERE user=?");
+          $state->execute([$_SESSION['id_utilisateurs']]);
           $rows = $state->fetch(PDO::FETCH_ASSOC);
           ?>
      

@@ -66,16 +66,6 @@ if (isset($_SESSION['id_utilisateurs'])) {
 <body>
   <div class="container my-5">
 
-    <!-- <form action="paramétrage.php" method="post" class="row g-3" style="background-color:#D9D9D9" id="loginform">
-
-      <div class="col-auto">
-        <input type="file" class="form-control" id="photo" name="image" placeholder="PHOTO" required>
-      </div>
-      <div class="col-6">
-        <input type="submit" id="submit" name="submit" class="btn btn-primary" style="background-color:#05006B">
-      </div>
-      <script src=""></script>
-    </form> -->
     <form action="" class="d-flex justify-content-center border p-2 needs-validation bg-light shadow" novalidate  method="post" enctype="multipart/form-data">
 
                 <input type="file"  id="inputGroupFile02" class="form-control w-100 m-3" name="image" required>
