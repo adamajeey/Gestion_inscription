@@ -67,8 +67,46 @@ if($row > 0){
     <title>Connexion</title>
 </head>
 <body>
+
+
+
+
+
     <h1 style="color: white ;">Accueil</h1>
 <div class="container">
+<?php
+           if(isset($_GET['login_err']))
+           {
+               $err = htmlspecialchars($_GET['login_err']);
+ 
+               switch($err)
+               {
+                   case 'mot_de_passe_utilisateurs':
+                       ?>
+                           <div class="alert alert-danger">
+                               <strong>Erreur</strong>  email ou mot de passe incorrect
+                           </div>
+                       <?php
+                   break;
+                   case 'email_utilisateurs':
+                       ?>
+                           <div class="alert alert-danger">
+                               <strong>Erreur</strong> email incorrect
+                           </div>
+                       <?php
+                   break;
+             
+                    case 'already':
+                       ?>
+                           <div class="alert alert-danger">
+                               <strong>Erreur</strong> compte non existant
+                           </div>
+                       <?php
+                   break;
+               }
+       
+            }
+    ?>
 <form class="needs-validation" action="" method="post" onsubmit="return verifinput()">
     <h2>Connexion</h2>
             <div class="form-group">
