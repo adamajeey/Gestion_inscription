@@ -106,10 +106,25 @@ $data = $req ->fetch();
         </tr>';
     }
     }
-    else {
-    $recup = $conn->prepare('SELECT * FROM utilisateurs WHERE etat_utilisateurs=0');
-    $recup->execute();    
-    while ($row = $recup->fetch(PDO::FETCH_ASSOC)) {
+   
+     
+    include("../connexion_bdd.php");
+    if (isset($_GET['page']) && !empty($_GET['page'])) {
+      $pageactuelle = (int) strip_tags($_GET['page']);
+    } else {
+      $pageactuelle = 1;
+    }
+    $list = $conn->prepare("SELECT count(*) AS nbre_user FROM utilisateurs WHERE etat_utilisateurs=0");
+    $list->execute();
+    $resultat = $list->fetch();
+    $nbresuser = (int)$resultat['nbre_user'];
+    $mapage = 5;
+    $pages = ceil($nbresuser / $mapage);
+    $first = ($pageactuelle * $mapage) - $mapage;
+    $id = $data['id_utilisateurs'];
+    $list = $conn->prepare("SELECT * FROM utilisateurs WHERE etat_utilisateurs=0  AND id_utilisateurs!=$id ORDER BY matricule_utilisateurs desc LIMIT $first,$mapage");
+    $list->execute(); 
+    while ($row = $list->fetch(PDO::FETCH_ASSOC)) {
 
     
       $prenom = $row['prenom_utilisateurs'];
@@ -142,10 +157,31 @@ $data = $req ->fetch();
       </td>
       </tr>';
     }
-    }
+    
     ?>
     </tbody>
     </table>
+
 </div>
+<nav aria-label="Page navigation example" style="margin-left:810px;">
+   <ul class="pagination">
+     <li class="page-item <?= ($pageactuelle == 1) ? "disabled" : "" ?>">
+       <a class="page-link" href="?page=<?= $pageactuelle - 1 ?>" aria-label="Previous">
+         <span aria-hidden="true">&laquo;</span>
+       </a>
+     </li>
+     <?php
+     for ($page = 1; $page <= $pages; $page++) : ?>
+       <li class="page-item <?= ($pageactuelle == $page) ? "active" : "" ?> ">
+         <a class="page-link" href="?page=<?= $page ?>"><?= $page ?></a>
+       </li>
+     <?php endfor ?>
+     <li class="page-item  <?= ($pageactuelle == $pages) ? "disabled" : "" ?> ">
+       <a class="page-link" href="?page=<?= $pageactuelle + 1 ?>" aria-label="Next">
+         <span aria-hidden="true">&raquo;</span>
+       </a>
+     </li>
+   </ul>
+ </nav>
 </body>
 </html>
