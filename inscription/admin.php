@@ -1,8 +1,6 @@
 <?php session_start();?>
 <?php include '../connexion_bdd.php';
-if ($_SESSION['id_utilisateurs']) {
-  $idSession=$_SESSION['id_utilisateurs'];
-}
+
 
 //Recuperation des donnees de l'utilisateurs 
 $req = $conn->prepare("SELECT * FROM utilisateurs WHERE id_utilisateurs = ?");
@@ -26,14 +24,6 @@ $data = $req ->fetch();
   <h1><?php echo $_SESSION['utilisateurs']?></h1>
   <!-- Recupèration de la photo à la base de données -->
  
-  <?php
-          $state = $conn->prepare("SELECT photo FROM images WHERE user=?");
-          /* var_dump($_SESSION['id_utilisateurs']);
-          exit; */
-          $state->execute([$_SESSION['id_utilisateurs']]);
-          $rows = $state->fetch(PDO::FETCH_ASSOC);
-         
-    ?>
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end espace" >
   <h2 style="color: rgba(2, 117, 216, 1); text-align:center; font-size:50px; height:5px"><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>
