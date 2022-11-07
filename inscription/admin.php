@@ -23,12 +23,16 @@ $data = $req ->fetch();
 </head> 
 <body>
  
-  <h1><?php echo $data['role_utilisateurs']?></h1>
+  <h1><?php echo $_SESSION['utilisateurs']?></h1>
   <!-- Recupèration de la photo à la base de données -->
+ 
   <?php
           $state = $conn->prepare("SELECT photo FROM images WHERE user=?");
+          /* var_dump($_SESSION['id_utilisateurs']);
+          exit; */
           $state->execute([$_SESSION['id_utilisateurs']]);
           $rows = $state->fetch(PDO::FETCH_ASSOC);
+         
     ?>
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end espace" >
@@ -43,9 +47,8 @@ $data = $req ->fetch();
     <a href="../index.php"><button class="btn btn-primary" type="button">Deconnexion</button></a> 
  </div>
  <div style="display: flex; flex-direction:column;">
-    <img src="data:images/jpg;charset=utf8;base64,<?php echo base64_encode($rows['photo']); ?>" class="rounded-circle border p-1 bg-secondary " height="100" width="100" />
-    <a href="traitementPhoto.php">Changer la photo</a>
-    <p style="color: rgba(2, 117, 216, 1); font-size:25px; height:5px; margin-left:15px;"><?php echo $data['matricule_utilisateurs'];?></p>
+    <?php echo '<img src="data:image;base64,'.base64_encode($_SESSION["photo"]).'" style="width: 100px;height:100px;border-radius:50%;"/>'; ?>
+    <p style="color: rgba(2, 117, 216, 1); font-size:25px; height:5px; margin-left:10px;"><?php echo $data['matricule_utilisateurs'];?></p>
  </div>        
 <div class="container">
   <div  class="modif">
@@ -86,7 +89,7 @@ $data = $req ->fetch();
     //Script recherche
     if ((isset($_GET['search'])) && !empty($_GET['search'])){
       $search = $_GET['search'];
-      $sql = "SELECT * from utilisateurs WHERE etat_utilisateurs = 0  AND prenom_utilisateurs lIKE '%$search%' OR nom_utilisateurs LIKE '%$search%' LIMIT 10";
+      $sql = "SELECT * from utilisateurs WHERE etat_utilisateurs = 0  AND prenom_utilisateurs lIKE '%$search%' OR nom_utilisateurs LIKE '%$search%' AND id_utilisateurs!=$id LIMIT 10";
       $list = $conn->prepare($sql);
       $list->execute();
       

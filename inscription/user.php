@@ -90,7 +90,7 @@ $data = $req ->fetch();
     //Script recherche
     if ((isset($_GET['search'])) && !empty($_GET['search'])){
       $search = $_GET['search'];
-      $sql = "SELECT * from utilisateurs WHERE etat_utilisateurs = 0  AND prenom_utilisateurs lIKE '%$search%' OR nom_utilisateurs LIKE '%$search%' LIMIT 10";
+      $sql = "SELECT * from utilisateurs WHERE etat_utilisateurs = 0  AND prenom_utilisateurs lIKE '%$search%' OR nom_utilisateurs LIKE '%$search%' AND id_utilisateurs!=$id LIMIT 10";
       $list = $conn->prepare($sql);
       $list->execute();
       

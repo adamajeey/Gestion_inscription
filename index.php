@@ -31,8 +31,8 @@ if($row > 0){
             $_SESSION['prenom_utilisateurs'] = $data['prenom_utilisateurs'];
             $_SESSION['nom_utilisateurs'] = $data['nom_utilisateurs'];
             $_SESSION['email_utilisateurs'] = $data['email_utilisateurs'];
-
             $_SESSION['utilisateurs'] = $data['role_utilisateurs'];
+            $_SESSION['photo'] = $data['photo_utilisateurs'];
 
             if ($data['role_utilisateurs'] == 'Administrateur' && $data['etat_utilisateurs'] == 0) {
                 header('Location:./inscription/admin.php');

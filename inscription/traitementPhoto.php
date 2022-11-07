@@ -35,9 +35,11 @@ if (isset($_SESSION['id_utilisateurs'])) {
           
           $insert = $conn->query("SELECT role_utilisateurs FROM utilisateurs WHERE id_utilisateurs=$id");  
          $role = $insert->fetchColumn();
-         
-          if ($role == 'Administateur') {
+         /* var_dump($role);
+         exit; */
+          if ($role == 'Administrateur') {
             header('location:admin.php? mes=image inserer avec succes!');
+            exit;
           }
           elseif($role == 'Utilisateur') {
             header('location:user.php? mes=image inserer avec succes!');

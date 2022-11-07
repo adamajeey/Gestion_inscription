@@ -8,6 +8,7 @@
   $email = $_POST['email']; 
   $mdp = password_hash($_POST['password'], PASSWORD_DEFAULT);
   $role = $_POST['MobileNumber'];
+  $photo = file_get_contents($_FILES['image']['tmp_name']);
   // $photo = $_POST['nom_photo']; 
 
   //Verification si email exit deja
@@ -19,8 +20,8 @@ if ($select_mail->rowCount() > 0)
     $message [] = "l'adresse mail existe déja";
 } else {
    // insertion des de donnees et auto-generer matricule 
-   $insertion = $conn->prepare("INSERT INTO `utilisateurs` (prenom_utilisateurs,nom_utilisateurs, email_utilisateurs, mot_de_passe_utilisateurs, role_utilisateurs) VALUES (?,?,?,?,?)");
-   $insertion ->execute (array($prenom, $nom, $email, $mdp,  $role,));
+   $insertion = $conn->prepare("INSERT INTO `utilisateurs` (prenom_utilisateurs,nom_utilisateurs, email_utilisateurs, mot_de_passe_utilisateurs, role_utilisateurs, photo_utilisateurs) VALUES (?,?,?,?,?,?)");
+   $insertion ->execute (array($prenom, $nom, $email, $mdp,  $role, $photo));
    
    $matricule = 'GR-'. $conn->lastInsertId(); 
    $sql2 = "UPDATE utilisateurs  SET  matricule_utilisateurs = '$matricule' WHERE email_utilisateurs = '$email' ";
@@ -63,7 +64,7 @@ if (isset($message)) {
 
 
 <div class="container">
-    <form class="row g-3" action="" method="post" onsubmit="return validation()">
+    <form class="row g-3" action="" method="post" onsubmit="return validation()" enctype="multipart/form-data">
 
                 <div class="form-group col-md-6" >
                   <label>Prenom*</label>
