@@ -72,7 +72,7 @@ if($row > 0){
 
 
 
-    <h1 style="color: white ;">Accueil</h1>
+<h1 style="color: white ;">Accueil</h1>
 <div class="container">
 <?php
            if(isset($_GET['login_err']))
@@ -144,7 +144,7 @@ if($row > 0){
             return true;
         }
         else{
-            mail.innerHTML = "L'adresse email incorrect!";
+            mail.innerHTML = "Champ vide!";
             mail.style.color = 'red';
             return false;
         }

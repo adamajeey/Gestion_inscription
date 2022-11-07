@@ -36,7 +36,7 @@ $data = $req ->fetch();
   <h2 style="color: rgba(2, 117, 216, 1); text-align:center; font-size:50px; height:5px"><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>
  <div  style="height:37px; margin-left:30%; display:flex">
  <form action="" method="">
-    <input name="search" type="search"style="width: 70%; height:36px" placeholder="Recherche"  />
+    <input name="search" type="search"style="width: 70%; height:36px" placeholder="Recherche"/>
     <button type="submit" class="btn btn-primary">Recherche</button>
   </form>
 </div>
@@ -44,9 +44,10 @@ $data = $req ->fetch();
     <a href="../index.php"><button class="btn btn-primary" type="button">Deconnexion</button></a> 
  </div>
  <img src="data:images/jpg;charset=utf8;base64,<?php echo base64_encode($rows['photo']); ?>" class="rounded-circle border p-1 bg-secondary " height="100" width="100" />
- <a href="traitementPhoto.php">photo</a>
- <p style="color: rgba(2, 117, 216, 1); font-size:25px; height:5px"><?php echo $data['matricule_utilisateurs'];?></p>
-          
+ <div style="display: flex; flex-direction:column;">
+  <a href="traitementPhoto.php">Changer la photo</a>
+  <p style="color: rgba(2, 117, 216, 1); font-size:25px; height:5px; margin-left:15px;"><?php echo $data['matricule_utilisateurs'];?></p>
+ </div>        
 <div class="container">
   <div  class="modif">
   <p><?=$_GET['modif'] ?? null?></p>
@@ -65,10 +66,8 @@ $data = $req ->fetch();
   <tbody>
   
     <?php
-    //Scrip de la recherche
-    
-   
-     
+    //Scrip de la pagination
+      
     include("../connexion_bdd.php");
     if (isset($_GET['page']) && !empty($_GET['page'])) {
       $pageactuelle = (int) strip_tags($_GET['page']);
@@ -94,8 +93,6 @@ $data = $req ->fetch();
       $select->execute();
       $row = $select->fetchAll(PDO::FETCH_ASSOC); 
       foreach ($row as $row) {
-         
-      
       $prenom = $row['prenom_utilisateurs'];
       $nom = $row['nom_utilisateurs'];       
       $email = $row['email_utilisateurs']; 
