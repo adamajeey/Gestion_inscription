@@ -43,10 +43,10 @@ $data = $req ->fetch();
     <a href="archive.php"><button class="btn btn-primary me-md-1" type="button">Archivés</button></a> 
     <a href="../index.php"><button class="btn btn-primary" type="button">Deconnexion</button></a> 
  </div>
- <img src="data:images/jpg;charset=utf8;base64,<?php echo base64_encode($rows['photo']); ?>" class="rounded-circle border p-1 bg-secondary " height="100" width="100" />
  <div style="display: flex; flex-direction:column;">
-  <a href="traitementPhoto.php">Changer la photo</a>
-  <p style="color: rgba(2, 117, 216, 1); font-size:25px; height:5px; margin-left:15px;"><?php echo $data['matricule_utilisateurs'];?></p>
+    <img src="data:images/jpg;charset=utf8;base64,<?php echo base64_encode($rows['photo']); ?>" class="rounded-circle border p-1 bg-secondary " height="100" width="100" />
+    <a href="traitementPhoto.php">Changer la photo</a>
+    <p style="color: rgba(2, 117, 216, 1); font-size:25px; height:5px; margin-left:15px;"><?php echo $data['matricule_utilisateurs'];?></p>
  </div>        
 <div class="container">
   <div  class="modif">
