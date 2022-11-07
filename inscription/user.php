@@ -22,34 +22,31 @@ $data = $req ->fetch();
   <title>User</title>
 </head> 
 <body>
- 
-  <h1>Espace utilisateurs</h1>
+<h1><?php echo $data['role_utilisateurs']?></h1>
   <!-- Recupèration de la photo à la base de données -->
   <?php
           $state = $conn->prepare("SELECT photo FROM images WHERE user=?");
           $state->execute([$_SESSION['id_utilisateurs']]);
           $rows = $state->fetch(PDO::FETCH_ASSOC);
           ?>
-     
-          <!-- ici nous avons l'image du profil -->
-          
-
-<div class="d-grid gap-2 d-md-flex justify-content-md-end espace" >
-  <h2 style="color: rgba(2, 117, 216, 1); text-align:center; font-size:50px; height:5px"><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>
- <div  style="height:37px; margin-left:30%; display:flex">
- <form action="" method="">
-    <input name="search" type="search"style="width: 70%; height:36px" placeholder="Recherche"  />
-    <button type="submit" class="btn btn-primary">Recherche</button>
-  </form>
-</div>
-    <a href="../index.php"><button class="btn btn-primary" type="button">Deconnexion</button></a> 
+           
+<div style="display: flex; flex-direction:column;" >
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end espace" >
+    <h2 style="color: rgba(2, 117, 216, 1); text-align:center; font-size:50px; height:5px"><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>
+  <div  style="height:37px; margin-left:30%; display:flex">
+  <form action="" method="">
+      <input name="search" type="search"style="width: 70%; height:36px" placeholder="Recherche"  />
+      <button type="submit" class="btn btn-primary">Recherche</button>
+    </form>
+  </div>
+      <a href="../index.php"><button class="btn btn-primary" type="button">Deconnexion</button></a> 
+  </div>
+  <div style="display: flex; flex-direction:column;">
+        <img src="data:images/jpg;charset=utf8;base64,<?php echo base64_encode($rows['photo']); ?>" class="rounded-circle border p-1 bg-secondary " height="100" width="100" />
+        <a href="traitementPhoto.php">Changer la photo</a>
+        <p style="color: rgba(2, 117, 216, 1); font-size:25px; height:5px; margin-left:15px;"><?php echo $data['matricule_utilisateurs'];?></p>
+  </div>
  </div>
- <div style="display: flex; flex-direction:column;">
-      <img src="data:images/jpg;charset=utf8;base64,<?php echo base64_encode($rows['photo']); ?>" class="rounded-circle border p-1 bg-secondary " height="100" width="100" />
-      <a href="traitementPhoto.php">Changer la photo</a>
-      <p style="color: rgba(2, 117, 216, 1); font-size:25px; height:5px; margin-left:15px;"><?php echo $data['matricule_utilisateurs'];?></p>
- </div>
-
 <div class="container">
   <div  class="modif">
   <p><?=$_GET['modif'] ?? null?></p>
@@ -66,53 +63,38 @@ $data = $req ->fetch();
   </thead>
   <tbody>
   
-    <?php
-    //Scrip de la recherche
-     if ( (isset($_GET['search'])) && ($_GET['search'] != "")){
-        $search = $_GET['search'];
-        $sql = "SELECT * from utilisateurs WHERE etat_utilisateurs = 0  AND matricule_utilisateurs lIKE '%$search%' OR nom_utilisateurs LIKE '%$search%' LIMIT 10";
-        $select = $conn->prepare($sql);
-        $select->execute();
-        $row = $select->fetchAll(PDO::FETCH_ASSOC); 
-        foreach ($row as $row) {
-           
-        
-        $prenom = $row['prenom_utilisateurs'];
-        $nom = $row['nom_utilisateurs'];       
-        $email = $row['email_utilisateurs']; 
-        $etat = $row['etat_utilisateurs']; 
-        $matricule = $row['matricule_utilisateurs'];
-        $role = $row['role_utilisateurs'];
-        $id = $row['id_utilisateurs'];
-  
-        echo '<tr>
-        <th>'.$prenom .'</th>
-        <td>'.$nom .'</td>
-        <td>'.$email .'</td>
-        <td>'.$matricule.'</td>
-        <td>'.$role .'</td>
-    
-        </tr>';
-    }
-    }
-   
-     
+    <?php   
+    //Pagination
     include("../connexion_bdd.php");
+    //on determine sur quelle page on se trouve
     if (isset($_GET['page']) && !empty($_GET['page'])) {
       $pageactuelle = (int) strip_tags($_GET['page']);
     } else {
       $pageactuelle = 1;
     }
+    //Pour connaitre le nombre utilisateurs dans notre page
     $list = $conn->prepare("SELECT count(*) AS nbre_user FROM utilisateurs WHERE etat_utilisateurs=0");
     $list->execute();
     $resultat = $list->fetch();
+    //recuperation nombre utilisateurs
     $nbresuser = (int)$resultat['nbre_user'];
-    $mapage = 5;
-    $pages = ceil($nbresuser / $mapage);
+    $mapage = 5; // on determine le nombre d'utilisateurs par page
+    // calcule le nombre tolal de page
+    $pages = ceil($nbresuser / $mapage); 
+    //
     $first = ($pageactuelle * $mapage) - $mapage;
     $id = $data['id_utilisateurs'];
     $list = $conn->prepare("SELECT * FROM utilisateurs WHERE etat_utilisateurs=0  AND id_utilisateurs!=$id ORDER BY matricule_utilisateurs desc LIMIT $first,$mapage");
     $list->execute(); 
+
+    //Script recherche
+    if ((isset($_GET['search'])) && !empty($_GET['search'])){
+      $search = $_GET['search'];
+      $sql = "SELECT * from utilisateurs WHERE etat_utilisateurs = 0  AND prenom_utilisateurs lIKE '%$search%' OR nom_utilisateurs LIKE '%$search%' LIMIT 10";
+      $list = $conn->prepare($sql);
+      $list->execute();
+      
+  }
     while ($row = $list->fetch(PDO::FETCH_ASSOC)) {
 
     

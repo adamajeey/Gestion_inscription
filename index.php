@@ -2,11 +2,7 @@
 <?php include 'connexion_bdd.php';?>
 
 <?php
-
-
 if (isset($_POST['email'],$_POST['password'])) {
-    
-
 if (!empty($_POST['email']) &&  !empty($_POST['password'])) { 
 $mail = htmlspecialchars($_POST['email']);
 $pwd = htmlspecialchars($_POST['password']);
@@ -67,9 +63,6 @@ if($row > 0){
     <title>Connexion</title>
 </head>
 <body>
-
-
-
 
 
 <h1 style="color: white ;">Accueil</h1>

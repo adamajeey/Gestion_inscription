@@ -20,19 +20,32 @@ if (isset($_SESSION['id_utilisateurs'])) {
         $image = $_FILES['image']['tmp_name']; 
         $imgContent = addslashes(file_get_contents($image)); 
 
-        // Insert image content into database 
-        // $db = new PDO('mysql:host=localhost;dbname=test;charset=UTF8', 'root', '');
+     
         $getImage = $conn->query("SELECT photo FROM images WHERE user=$id"); 
         if ($getImage) {
-            $conn->query("DELETE FROM images WHERE user=$id");
+          $insert = $conn->prepare("UPDATE images SET photo=:photo WHERE id=:id");
         }
-        $insert = $conn->query("INSERT into images (photo,user) VALUES ('$imgContent',$id)"); 
+        $insert->bindParam(':photo', $imgContent);
+        $insert->bindParam(':id', $id);
 
-        if($insert){ 
-          header('location:admin.php? mes=image inserer avec succes!');
+        /* var_dump($insert);
+        exit; */
+    
+        if($insert->execute()){
+          
+          $insert = $conn->query("SELECT role_utilisateurs FROM utilisateurs WHERE id_utilisateurs=$id");  
+         $role = $insert->fetchColumn();
+         
+          if ($role == 'Administateur') {
+            header('location:admin.php? mes=image inserer avec succes!');
+          }
+          elseif($role == 'Utilisateur') {
+            header('location:user.php? mes=image inserer avec succes!');
+          }
+         
             $status = 'success'; 
             $statusMsg = "File uploaded successfully."; 
-            // header('location:editProfile.php');
+      
         }else{ 
             $statusMsg = "File upload failed, please try again."; 
         }
