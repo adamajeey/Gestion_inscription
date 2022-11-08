@@ -108,7 +108,7 @@ if (isset($message)) {
                 
                 <div class="col-md-3">
                   <label for="fil" class="form-label">Photo de profil</label>
-                  <input type="file" name="image" class="form-control" id="file">
+                  <input type="file" name="image" class="form-control" id="file" accept="jpeg, jpg, png">
                </div>
 
                 <div class="col-12">
