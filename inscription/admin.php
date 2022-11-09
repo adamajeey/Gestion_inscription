@@ -26,7 +26,7 @@ $data = $req ->fetch();
  
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end espace" >
-  <h2 style="color: rgba(2, 117, 216, 1); text-align:center; font-size:50px; height:5px"><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>
+  <h2 style="color: rgba(2, 117, 216, 1); text-align:center; font-size:30px; height:5px"><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>
  <div  style="height:37px; margin-left:30%; display:flex">
  <form action="" method="">
     <input name="search" type="search"style="width: 70%; height:36px" placeholder="Recherche"/>
@@ -34,7 +34,7 @@ $data = $req ->fetch();
   </form>
 </div>
     <a href="archive.php"><button class="btn btn-primary me-md-1" type="button">Archivés</button></a> 
-    <a href="../index.php"><button class="btn btn-primary" type="button">Deconnexion</button></a> 
+    <a href="deconnexion.php"><button class="btn btn-primary" type="button">Deconnexion</button></a> 
  </div>
  <div style="display: flex; flex-direction:column;">
     <?php echo '<img src="data:image;base64,'.base64_encode($_SESSION["photo"]).'" style="width: 100px;height:100px;border-radius:50%;"/>'; ?>

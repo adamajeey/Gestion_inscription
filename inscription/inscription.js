@@ -4,72 +4,99 @@ function validation() {
   let password= document.getElementById('password').value;
   let Confirmpassword= document.getElementById('Confirmpassword').value;
   let mobilenumber= document.getElementById('mobilenumber').value;
-  let email= document.getElementById('email').value;
+  let email= document.getElementById('mail').value;
+  let regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
   let nom= document.getElementById('nom').value;
   
   
+  
+  
     if (user.trim() == "") {
-    document.getElementById('username').innerHTML ="Ce champ ne doit pas etre vide!";/ */
+    document.getElementById('username').innerHTML ="Ce champ ne doit pas etre vide!";
+    setTimeout(() => {
+      document.getElementById("username").innerHTML =""; 
+      }, 2000);
     return false;
                
   }
    if ((user.length <=2)  ||  (user.length >=200)) {
-     document.getElementById('username').innerHTML ="Le prenom d'utilisateur doit comporter entre 2 et 20 caractères "
+     document.getElementById('username').innerHTML ="Le prenom d'utilisateur doit comporter entre 2 et 200 caractères "
+     setTimeout(() => {
+      document.getElementById("username").innerHTML =""; 
+      }, 2000);
    }else if (!isNaN(user)) {
       document.getElementById('username').innerHTML = ""
    }
   
-  
    if (nom.trim() == "") {
-    document.getElementById('nom').innerHTML ="Ce champ ne doit pas etre vide!";
+    document.getElementById('users').innerHTML ="Ce champ ne doit pas etre vide!";
+    setTimeout(() => {
+      document.getElementById("users").innerHTML =""; 
+      }, 2000);
     return false;
                
   }
    if ((nom.length <=2)  ||  (nom.length >=200)) {
-     document.getElementById('nom').innerHTML ="Le nom d'utilisateur doit comporter entre 2 et 20 caractères ";
+     document.getElementById('users').innerHTML ="Le nom d'utilisateur doit comporter entre 2 et 200 caractères ";
+     setTimeout(() => {
+      document.getElementById("users").innerHTML =""; 
+      }, 2000);
    }else if (!isNaN(nom)) {
-      document.getElementById('nom').innerHTML = ""
+      document.getElementById('users').innerHTML = ""
    };
   
   
   if (password == "") {
     document.getElementById('passwordid').innerHTML ="Ce champ ne doit pas etre vide!"
+    setTimeout(() => {
+      document.getElementById("passwordid").innerHTML =""; 
+      }, 2000);
      return false;
       }else if ((password.length <=4)  ||  (password.length >=200)) {
        document.getElementById('passwordid').innerHTML ="le mot de passe utilisateur doit comporter entre 4 et 200 caractères"
+       setTimeout(() => {
+        document.getElementById("passwordid").innerHTML =""; 
+        }, 2000);
         return false;
       }
   
       if (Confirmpassword == "") {
          document.getElementById('Confirmpasswordid').innerHTML ="Confirmer le mot de passe"
+         setTimeout(() => {
+          document.getElementById("Confirmpasswordid").innerHTML =""; 
+          }, 2000);
          return false;
          }else if (password!= Confirmpassword) {
            document.getElementById('Confirmpasswordid').innerHTML ="Le mot de passe ne correspond pas"
+           setTimeout(() => {
+            document.getElementById("Confirmpasswordid").innerHTML =""; 
+            }, 2000);
             return false;
          }
+
+       if (email==" " || email =="") {
+          document.getElementById("emailid").innerHTML ="Ce champ ne doit pas etre vide!";
+          setTimeout(() => {
+          document.getElementById("emailid").innerHTML =""; 
+          }, 2000);
+          return false;
+      } 
+      if (!email.match(regex)){
+        document.getElementById('emailid').innerHTML = "L'adresse email incorrect!";
+          document.getElementById('emailid').style.color = 'red';
+          setTimeout(() => {
+            document.getElementById("emailid").innerHTML =""; 
+            }, 2000);
+            return false;
+      }
   
       if (mobilenumber.trim() == "") {
             document.getElementById("MobileNumberid").innerHTML ="Veuiller selection un role svp!";
-                return false;
-      }else if(mobilenumber.trim()=""){
-         document.getElementById("MobileNumberid").innerHTML =""
-            return false;
-      }else if (isNaN(mobilenumber)) {
-          document.getElementById('MobileNumberid').innerHTML =""
-            return false
-      };
-      let regex = /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
-      if (regex.test(document.getElementById('email')).value){
-        document.getElementById('email').innerHTML = '';
-        return true;
-    }
-    else{
-        email.innerHTML = "L'adresse email incorrect!";
-        email.style.color = 'red';
-        return false;
-    
-        
-    }
+            setTimeout(() => {
+              document.getElementById("MobileNumberid").innerHTML =""; 
+              }, 2000);
+          return false;
+      }
    }
 
 

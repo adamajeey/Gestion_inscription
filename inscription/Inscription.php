@@ -8,7 +8,7 @@
   $email = $_POST['email']; 
   $mdp = password_hash($_POST['password'], PASSWORD_DEFAULT);
   $role = $_POST['MobileNumber'];
-  $photo = file_get_contents($_FILES['image']['tmp_name']);
+  @$photo = file_get_contents($_FILES['image']['tmp_name']);
   // $photo = $_POST['nom_photo']; 
 
   //Verification si email exit deja
@@ -34,11 +34,6 @@ if ($select_mail->rowCount() > 0)
 
 ?>
 
-
-
-<!-- // Recuperation images -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +57,6 @@ if (isset($message)) {
  } 
 ?> 
 
-
 <div class="container">
     <form class="row g-3" action="" method="post" onsubmit="return validation()" enctype="multipart/form-data">
 
@@ -75,7 +69,7 @@ if (isset($message)) {
                 <div class="form-group col-md-6" >
                   <label>Nom*</label>
                   <input type="text" name="nom" class="form-control" id="nom" placeholder="">
-                  <span id="nom" class="text-danger"></span>
+                  <span id="users" class="text-danger"></span>
                 </div>
 
                 <div class="form-group col-md-6">
@@ -92,7 +86,7 @@ if (isset($message)) {
               
                 <div class="form-group col-md-6">
                   <label>Email*</label>
-                  <input type="email" name="email" class="form-control" id="email">
+                  <input type="text" name="email" class="form-control" id="mail">
                   <span id="emailid" class="text-danger"></span>
                 </div>
 

@@ -143,9 +143,8 @@ if($row > 0){
         }
 
         if (password.trim() == "") {
-            document.getElementById('mdp').innerHTML ="Ce champ ne doit pas etre vide!";
+            document.getElementById('mdp').innerHTML ="Champ vide!";
             return false;
-         
          }
          }
 </script>

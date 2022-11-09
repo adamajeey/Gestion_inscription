@@ -24,7 +24,7 @@ $data = $req ->fetch();
            
 <div style="display: flex; flex-direction:column;" >
   <div class="d-grid gap-2 d-md-flex justify-content-md-end espace" >
-    <h2 style="color: rgba(2, 117, 216, 1); text-align:center; font-size:50px; height:5px"><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>
+    <h2 style="color: rgba(2, 117, 216, 1); text-align:center; font-size:30px; height:5px"><?php echo $data['prenom_utilisateurs']. " " .$data['nom_utilisateurs']?></h2>
   <div  style="height:37px; margin-left:30%; display:flex">
   <form action="" method="">
       <input name="search" type="search"style="width: 70%; height:36px" placeholder="Recherche"  />
