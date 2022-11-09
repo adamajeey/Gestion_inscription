@@ -121,31 +121,27 @@ if($row > 0){
        
 </body>
 <script>
-    function verifinput()  
-    {
-        let email = document.getElementById('email');
-        let password = document.getElementById('password');
-        let regex = /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
-        let mail = document.getElementById('mail');
-        let mdp = document.getElementById('mdp');
+    function verifinput() {
+     let email = document.getElementById('email').value;
+     let password = document.getElementById('password').value;
 
+     if (email==" " || email =="") {
+          document.getElementById("mail").innerHTML = "Champ vide!";
+          document.getElementById("mail").style.color ='red';
+          setTimeout(() => {
+          document.getElementById("mail").innerHTML =""; 
+          }, 2000);
+          return false;
+      } 
 
-
-
-        if (regex.test(document.getElementById('email').value)){
-            document.getElementById('email').innerHTML = '';
-            return true;
-        }
-        else{
-            mail.innerHTML = "Champ vide!";
-            mail.style.color = 'red';
-            return false;
-        }
-
-        if (password.trim() == "") {
-            document.getElementById('mdp').innerHTML ="Champ vide!";
-            return false;
-         }
-         }
+     if (password == "") {
+    document.getElementById('mdp').innerHTML ="Champ vide!";
+    document.getElementById('mdp').style.color = "red";
+    setTimeout(() => {
+      document.getElementById("mdp").innerHTML =""; 
+      }, 2000);
+     return false;
+    }
+    }
 </script>
 </html>
