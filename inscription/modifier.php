@@ -67,7 +67,7 @@ echo"
 
 <div class='form-group col-md-12' >
     <label><span class='pass'>Nom*</span></label>
-    <input type='text' name='nom' class='form-control' id='user' value='$nom''>
+    <input type='text' name='nom' class='form-control' id='users' value='$nom''>
     <span id='username' class='text-danger'></span>
 </div> <br>
 	
@@ -78,8 +78,6 @@ echo"
 </div><br>
 <button type='submit' class='btn btn-light bouton'>Modifier</button>
 </form>";
-
-
 }
 }
 ?> 

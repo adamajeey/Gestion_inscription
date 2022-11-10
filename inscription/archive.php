@@ -22,7 +22,7 @@
       <th scope="col">Nom</th>
       <th scope="col">Email</th>
       <th scope="col">matricule</th>
-      <th scope="col">Role</th>
+      <th scope="col">Date d'archivage</th>
       <th scope="col">Action</th> 
     </tr>
   </thead>
@@ -41,7 +41,7 @@ while ($row=$req->fetch(PDO::FETCH_ASSOC)) {
   $email=$row['email_utilisateurs'];
   $matricule=$row['matricule_utilisateurs'];
   $etat=$row['etat_utilisateurs'];
-  $role=$row['role_utilisateurs'];
+  $date=$row['date_archivage_utilisateurs'];
   $datearch=$row['date_archivage_utilisateurs'];
 
   echo '<tr class="cont">
@@ -50,7 +50,7 @@ while ($row=$req->fetch(PDO::FETCH_ASSOC)) {
       <td>'.$nom.'</td>
       <td>'.$email.'</td>
       <td>'.$matricule.'</td>
-      <td>'.$role .'</td>
+      <td>'.$date .'</td>
       <td>
         <a href="desarchive.php?id_ut='.$id.'"><i class="bi bi-pencil-square"></i><svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M9 42C8.2 42 7.5 41.7 6.9 41.1C6.3 40.5 6 39.8 6 39V12.85C6 12.35 6.05 11.925 6.15 11.575C6.25 11.225 6.43333 10.9 6.7 10.6L9.5 6.8C9.76667 6.5 10.075 6.29167 10.425 6.175C10.775 6.05833 11.1833 6 11.65 6H36.35C36.8167 6 37.2167 6.05833 37.55 6.175C37.8833 6.29167 38.1833 6.5 38.45 6.8L41.3 10.6C41.5667 10.9 41.75 11.225 41.85 11.575C41.95 11.925 42 12.35 42 12.85V39C42 39.8 41.7 40.5 41.1 41.1C40.5 41.7 39.8 42 39 42H9ZM9.85 11.3H38.1L36.3 9H11.65L9.85 11.3ZM9 14.3V39H39V14.3H9ZM22.5 34.5H25.5V24.45L29.8 28.75L31.8 26.75L24 18.95L16.2 26.75L18.2 28.75L22.5 24.45V34.5ZM9 39H39H9Z" fill="white"/>

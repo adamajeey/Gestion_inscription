@@ -15,7 +15,7 @@ $data = $req ->fetch();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="users.css">
+  <link rel="stylesheet" href="user.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css%22%3E">
   <title>Admin</title>
 </head> 
@@ -36,7 +36,7 @@ $data = $req ->fetch();
     <a href="archive.php"><button class="btn btn-primary me-md-1" type="button">Archivés</button></a> 
     <a href="deconnexion.php"><button class="btn btn-primary" type="button">Deconnexion</button></a> 
  </div>
- <div style="display: flex; flex-direction:column;">
+ <div style="display: flex; flex-direction:column; position:absolute;top:118px">
     <?php echo '<img src="data:image;base64,'.base64_encode($_SESSION["photo"]).'" style="width: 100px;height:100px;border-radius:50%;"/>'; ?>
     <p style="color: rgba(2, 117, 216, 1); font-size:25px; height:5px; margin-left:10px;"><?php echo $data['matricule_utilisateurs'];?></p>
  </div>        
@@ -79,7 +79,8 @@ $data = $req ->fetch();
     //Script recherche
     if ((isset($_GET['search'])) && !empty($_GET['search'])){
       $search = $_GET['search'];
-      $sql = "SELECT * from utilisateurs WHERE etat_utilisateurs = 0  AND prenom_utilisateurs lIKE '%$search%' OR nom_utilisateurs LIKE '%$search%' AND id_utilisateurs!=$id LIMIT 10";
+      $id = $data['id_utilisateurs'];
+      $sql = "SELECT * from utilisateurs WHERE etat_utilisateurs = 0  AND prenom_utilisateurs AND id_utilisateurs!=$id lIKE '%$search%' OR nom_utilisateurs LIKE '%$search%' AND id_utilisateurs!=$id LIMIT 10";
       $list = $conn->prepare($sql);
       $list->execute();
       

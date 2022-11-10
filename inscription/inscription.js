@@ -12,7 +12,7 @@ function validation() {
   
   
     if (user.trim() == "") {
-    document.getElementById('username').innerHTML ="Ce champ ne doit pas etre vide!";
+    document.getElementById('username').innerHTML ="Veuillez remplir ce champ svp!";
     setTimeout(() => {
       document.getElementById("username").innerHTML =""; 
       }, 2000);
@@ -29,7 +29,7 @@ function validation() {
    }
   
    if (nom.trim() == "") {
-    document.getElementById('users').innerHTML ="Ce champ ne doit pas etre vide!";
+    document.getElementById('users').innerHTML ="Veuillez remplir ce champ svp!";
     setTimeout(() => {
       document.getElementById("users").innerHTML =""; 
       }, 2000);
@@ -47,7 +47,7 @@ function validation() {
   
   
   if (password == "") {
-    document.getElementById('passwordid').innerHTML ="Ce champ ne doit pas etre vide!"
+    document.getElementById('passwordid').innerHTML ="Veuillez remplir ce champ svp!"
     setTimeout(() => {
       document.getElementById("passwordid").innerHTML =""; 
       }, 2000);
@@ -75,7 +75,7 @@ function validation() {
          }
 
        if (email==" " || email =="") {
-          document.getElementById("emailid").innerHTML ="Ce champ ne doit pas etre vide!";
+          document.getElementById("emailid").innerHTML ="Veuillez remplir ce champ svp!";
           setTimeout(() => {
           document.getElementById("emailid").innerHTML =""; 
           }, 2000);
@@ -91,7 +91,7 @@ function validation() {
       }
   
       if (mobilenumber.trim() == "") {
-            document.getElementById("MobileNumberid").innerHTML ="Veuiller selection un role svp!";
+            document.getElementById("MobileNumberid").innerHTML ="Veuillez remplir ce champ svp!";
             setTimeout(() => {
               document.getElementById("MobileNumberid").innerHTML =""; 
               }, 2000);

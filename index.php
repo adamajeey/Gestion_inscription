@@ -126,7 +126,7 @@ if($row > 0){
      let password = document.getElementById('password').value;
 
      if (email==" " || email =="") {
-          document.getElementById("mail").innerHTML = "Champ vide!";
+          document.getElementById("mail").innerHTML = "Renseignez ce champ vide!";
           document.getElementById("mail").style.color ='red';
           setTimeout(() => {
           document.getElementById("mail").innerHTML =""; 
@@ -135,7 +135,7 @@ if($row > 0){
       } 
 
      if (password == "") {
-    document.getElementById('mdp').innerHTML ="Champ vide!";
+    document.getElementById('mdp').innerHTML ="Renseignez ce champ vide!";
     document.getElementById('mdp').style.color = "red";
     setTimeout(() => {
       document.getElementById("mdp").innerHTML =""; 
