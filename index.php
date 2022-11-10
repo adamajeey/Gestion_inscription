@@ -41,6 +41,8 @@ if($row > 0){
             elseif($data['role_utilisateurs'] == 'Utilisateur' && $data['etat_utilisateurs'] == 0){
                 header('location:./inscription/user.php');
                 die();
+            } else {
+                header('Location: index.php?login_err=archive'); die();
             }
         }else{header('Location: index.php?login_err=mot_de_passe_utilisateurs'); die();}
     }else{header('Location : index.php?login_err=email_utilisateurs'); die();}
@@ -96,6 +98,13 @@ if($row > 0){
                            </div>
                        <?php
                    break;
+                   case 'archive':
+                    ?>
+                        <div class="alert alert-danger">
+                            <strong>Erreur</strong> Utilisateur archivé
+                        </div>
+                    <?php
+                break;
                }
        
             }
@@ -124,6 +133,7 @@ if($row > 0){
     function verifinput() {
      let email = document.getElementById('email').value;
      let password = document.getElementById('password').value;
+     let regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
      if (email==" " || email =="") {
           document.getElementById("mail").innerHTML = "Renseignez ce champ vide!";
@@ -133,6 +143,15 @@ if($row > 0){
           }, 2000);
           return false;
       } 
+
+      if (!email.match(regex)){
+        document.getElementById('mail').innerHTML = "L'adresse email incorrect!";
+          document.getElementById('mail').style.color = 'red';
+          setTimeout(() => {
+            document.getElementById("mail").innerHTML =""; 
+            }, 2000);
+            return false;
+      }
 
      if (password == "") {
     document.getElementById('mdp').innerHTML ="Renseignez ce champ vide!";
