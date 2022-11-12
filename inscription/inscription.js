@@ -16,8 +16,7 @@ function validation() {
     setTimeout(() => {
       document.getElementById("username").innerHTML =""; 
       }, 2000);
-    return false;
-               
+    return false;           
   }
    if ((user.length <=2)  ||  (user.length >=200)) {
      document.getElementById('username').innerHTML ="Le prenom d'utilisateur doit comporter entre 2 et 200 caractères "
@@ -33,8 +32,7 @@ function validation() {
     setTimeout(() => {
       document.getElementById("users").innerHTML =""; 
       }, 2000);
-    return false;
-               
+    return false;        
   }
    if ((nom.length <=2)  ||  (nom.length >=200)) {
      document.getElementById('users').innerHTML ="Le nom d'utilisateur doit comporter entre 2 et 200 caractères ";

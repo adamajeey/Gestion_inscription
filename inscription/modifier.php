@@ -56,31 +56,73 @@
                 $nom = $row['nom_utilisateurs'];
                 $email = $row['email_utilisateurs'];
 
-  
-echo"
-<form action='' method='POST' class='form-group'>
+            }
+        }
+        ?> 
+
+<form action='' method='POST' class='form-group' onsubmit="return validation()">
 <div class='form-group col-md-12' >
     <label><span class='pass'>Prenom*</span></label>
-    <input type='text' name='prenom' class='form-control' id='user' value='$prenom'>
+    <input type='text' name='prenom' class='form-control' id='user'  <?php echo " value='$prenom'"?>>
     <span id='username' class='text-danger'></span>
 </div> <br>
 
 <div class='form-group col-md-12' >
     <label><span class='pass'>Nom*</span></label>
-    <input type='text' name='nom' class='form-control' id='users' value='$nom''>
-    <span id='username' class='text-danger'></span>
+    <input type='text' name='nom' class='form-control' id='users'  <?php echo " value='$nom'"?>>
+    <span id='usernames' class='text-danger'></span>
 </div> <br>
 	
 <div class='form-group col-md-12' >
     <label><span class='pass'>Email*</span></label>
-    <input type='text' name='email' class='form-control' id='user' value='$email''>
-    <span id='username' class='text-danger'></span>
+    <input type='text' name='email' class='form-control' id='mail'   <?php echo " value='$email'"?>>
+    <span id='emailid' class='text-danger'></span>
 </div><br>
 <button type='submit' class='btn btn-light bouton'>Modifier</button>
-</form>";
-}
-}
-?> 
+</form>;
 </div>
+<script>
+
+function validation() {
+
+    let user= document.getElementById('user').value;
+    let nom= document.getElementById('users').value;
+    let email= document.getElementById('mail').value;
+    let regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+
+    if (user.trim() == "") {
+    document.getElementById('username').innerHTML ="Veuillez remplir ce champ svp!";
+    setTimeout(() => {
+      document.getElementById("username").innerHTML =""; 
+      }, 2000);
+    return false;           
+  }
+
+  if (nom.trim() == "") {
+    document.getElementById('usernames').innerHTML ="Veuillez remplir ce champ svp!";
+    setTimeout(() => {
+      document.getElementById('usernames').innerHTML =""; 
+      }, 2000);
+    return false;        
+  }
+
+  if (email==" " || email =="") {
+          document.getElementById("emailid").innerHTML ="Veuillez remplir ce champ svp!";
+          setTimeout(() => {
+          document.getElementById("emailid").innerHTML =""; 
+          }, 2000);
+          return false;
+      } 
+      if (!email.match(regex)){
+        document.getElementById('emailid').innerHTML = "L'adresse email incorrect!";
+          document.getElementById('emailid').style.color = 'red';
+          setTimeout(() => {
+            document.getElementById("emailid").innerHTML =""; 
+            }, 2000);
+            return false;
+      }
+
+}
+</script>
 </body>
 </html>
